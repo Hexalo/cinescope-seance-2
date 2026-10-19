@@ -12,7 +12,10 @@ Le bouton de reservation n'est pas atteignable au clavier
 ### 2. Fermer une modale
 Le bouton de fermeture de modale n'est pas atteignable au clavier
 
-### 3.
+### 3. Gestion de la modale
+Actuellement, la modale contient plusieurs problemes:
+- Le focus ne fonctionne pas
+- La touche echap ne ferme pas la modale
 
 ### 4.
 

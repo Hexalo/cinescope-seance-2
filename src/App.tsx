@@ -75,9 +75,9 @@ export default function App() {
         </section>
         {selectedFilm && (
           <div className="backdrop">
-            <div className="modal">
+            <div className="modal" role="dialog" aria-modal aria-labelledby="h2-id">
               <div className="dialog-heading">
-                <h2>Réserver {selected}</h2>
+                <h2 id="h2-id">Réserver {selected}</h2>
                 <button className="close" onClick={() => setSelected(null)}>×</button>
               </div>
               <p>{selectedFilm.genre} · Séance de {selectedFilm.time}</p>

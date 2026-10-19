@@ -6,7 +6,8 @@
 
 ## Constats
 
-### 1.
+### 1. Bouton de reservation
+Le bouton de reservation n'est pas atteignable au clavier
 
 ### 2.
 

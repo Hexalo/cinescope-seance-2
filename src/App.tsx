@@ -78,7 +78,7 @@ export default function App() {
             <div className="modal">
               <div className="dialog-heading">
                 <h2>Réserver {selected}</h2>
-                <span className="close" onClick={() => setSelected(null)}>×</span>
+                <button className="close" onClick={() => setSelected(null)}>×</button>
               </div>
               <p>{selectedFilm.genre} · Séance de {selectedFilm.time}</p>
               <p className={"availability " + (selectedFilm.available ? "available" : "unavailable")}>

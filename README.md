@@ -9,7 +9,8 @@
 ### 1. Bouton de reservation
 Le bouton de reservation n'est pas atteignable au clavier
 
-### 2.
+### 2. Fermer une modale
+Le bouton de fermeture de modale n'est pas atteignable au clavier
 
 ### 3.
 

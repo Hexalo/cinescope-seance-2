@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import posterAube from "./assets/aube.svg";
 import posterMemoire from "./assets/memoire.svg";
 import posterOrbite from "./assets/orbite.svg";
@@ -42,6 +42,12 @@ export default function App() {
       ),
     [query],
   );
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (selectedFilm && dialog && !dialog.open) dialog.showModal();
+  }, [selectedFilm]);
+  const closeDialog = () => dialogRef.current?.close();
   const toggleFavorite = (id: number) => {
     setFavorites((items) =>
       items.includes(id) ? items.filter((item) => item !== id) : [...items, id],
@@ -132,40 +138,48 @@ export default function App() {
           <p>Le cinéma ouvre trente minutes avant la première séance.</p>
         </section>
         {selectedFilm && (
-          <div className="backdrop">
-            <dialog className="modal">
-              <div className="dialog-heading">
-                <h2>Réserver {selected}</h2>
-                <span className="close" onClick={() => setSelected(null)}>
-                  ×
-                </span>
-              </div>
-              <p>
-                {selectedFilm.genre} · Séance de {selectedFilm.time}
-              </p>
-              <p
-                className={
-                  "availability " +
-                  (selectedFilm.available ? "available" : "unavailable")
-                }
-              >
-                {selectedFilm.available
-                  ? "Places disponibles"
-                  : "Séance complète"}
-              </p>
-              <p>
-                Consultez la séance et sa disponibilité avant de revenir au
-                programme.
-              </p>
+          <dialog
+            ref={dialogRef}
+            className="modal"
+            aria-labelledby="dialog-title"
+            onClose={() => setSelected(null)}
+          >
+            <div className="dialog-heading">
+              <h2 id="dialog-title">Réserver {selectedFilm.title}</h2>
               <button
-                className="dialog-action"
+                className="close"
                 type="button"
-                onClick={() => setSelected(null)}
+                aria-label="Fermer"
+                onClick={closeDialog}
               >
-                Revenir aux films
+                <span aria-hidden="true">×</span>
               </button>
-            </dialog>
-          </div>
+            </div>
+            <p>
+              {selectedFilm.genre} · Séance de {selectedFilm.time}
+            </p>
+            <p
+              className={
+                "availability " +
+                (selectedFilm.available ? "available" : "unavailable")
+              }
+            >
+              {selectedFilm.available
+                ? "Places disponibles"
+                : "Séance complète"}
+            </p>
+            <p>
+              Consultez la séance et sa disponibilité avant de revenir au
+              programme.
+            </p>
+            <button
+              className="dialog-action"
+              type="button"
+              onClick={closeDialog}
+            >
+              Revenir aux films
+            </button>
+          </dialog>
         )}
       </main>
     </>
